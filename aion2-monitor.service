@@ -1,0 +1,18 @@
+[Unit]
+Description=Aion 2 Market Monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=YOUR_USER
+WorkingDirectory=/opt/aion2-monitor
+ExecStart=/usr/bin/python3 /opt/aion2-monitor/aion2_monitor.py
+Restart=always
+RestartSec=30
+# Put secrets in a file readable only by the service user
+EnvironmentFile=/etc/aion2-monitor.env
+Environment=POLL_INTERVAL=300
+
+[Install]
+WantedBy=multi-user.target
